@@ -63,16 +63,25 @@ class pregame():
         self.df = self.df[(self.df[col_name] >= lower_bound) & (self.df[col_name] <= upper_bound)]
         return self.df
 
-    def check_outliers(self):
-        column_list = self.df.select_dtypes(include =['number', 'float', 'integer'])
-        print("numeric columns: ", column_list)
-        for col_name in column_list:
-            Q1 = self.df[col_name].quantile(0.25)
-            Q3 = self.df[col_name].quantile(0.75)
-            IQR = Q3 - Q1
-            lower_bound = Q1 - 1.5 * IQR
-            upper_bound = Q3 + 1.5 * IQR
-            self.remove_outliers(col_name, lower_bound, upper_bound)
+    def not_vip(self, column_with_outlier = None):
+        if column_with_outlier:
+            for column in column_with_outlier:
+                Q1 = self.df[column].quantile(0.25)
+                Q3 = self.df[column].quantile(0.75)
+                IQR = Q3 - Q1
+                lower_bound = Q1 - 1.5 * IQR
+                upper_bound = Q3 + 1.5 * IQR
+                self.remove_outliers(column, lower_bound, upper_bound)
+        else:
+            column_list = self.df.select_dtypes(include =['number', 'float', 'integer'])
+            print("numeric columns: ", column_list)
+            for col_name in column_list:
+                Q1 = self.df[col_name].quantile(0.25)
+                Q3 = self.df[col_name].quantile(0.75)
+                IQR = Q3 - Q1
+                lower_bound = Q1 - 1.5 * IQR
+                upper_bound = Q3 + 1.5 * IQR
+                self.remove_outliers(col_name, lower_bound, upper_bound)
         return self.df
 
     
