@@ -49,8 +49,9 @@ class pregame():
    
     def micdrop(self, what_to_drop, column_list): #dropping duplicates, entire columns or nulls
         if what_to_drop == "columns":
+            for column in column_list:
             #drop name columns with not value
-            self.df.drop(column_list, axis = 1, inplace = True)
+                self.df.drop(column, axis = 1, inplace = True)
         elif what_to_drop == "na":
             self.df.dropna(subset=column_list, inplace = True)
         else:
