@@ -25,17 +25,24 @@ class Plotting:
         self.display_menu()
         choice = input("Enter the number of the plot you want to create: ")
         if choice == '1':
-            self.plot_violin()
+            self.violinplot_menu()
         elif choice == '2':
             self.plot_num_subplots()
         elif choice == '3':
-            self.plot_correlation_heatmap()
+            self.heatmap_menu()
         elif choice == '4':
             self.plot_choropleth()
         elif choice == '5':
-            self.plot_line()
+            self.plot_line_menu()
         else:
             print("Invalid choice. Please enter a number between 1 and 5.")
+
+    def violinplot_menu(self):
+        columns = input("Enter the columns to plot (comma-separated): ").split(",")
+        title = input("Enter the title for the plot: ")
+        xlabel = input("Enter the xlabel for the plot: ")
+        ylabel = input("Enter the ylabel for the plot: ")
+        self.violinplot(columns, title=title, xlabel=xlabel, ylabel=ylabel)
 
     def violinplot(self, columns, title="", xlabel="", ylabel=""):
         plt.figure(figsize=(12, 8))
@@ -71,6 +78,10 @@ class Plotting:
         plt.tight_layout()
         plt.show()
 
+    def heatmap_menu(self):
+        correlation_matrix = input("Enter the columns to verify the correlation: ")
+        self.heatmap(correlation_matrix)
+
     def heatmap(self, correlation_matrix):
         plt.figure(figsize=(10, 8))
         sns.heatmap(self.dataframe[correlation_matrix], annot=True, vmin=-1, vmax=1)
@@ -91,6 +102,14 @@ class Plotting:
         fig.update_geos(projection_type="orthographic", showcoastlines=True, coastlinecolor='Black',
                         showland=True, landcolor='LightGreen', showocean=True)
         fig.show()
+
+    def plot_line_menu(self):
+        x = input("Enter the name of the column for x-axis: ")
+        y = input("Enter the name of the column for y-axis: ")
+        title = input("Enter the title for the plot: ")
+        xlabel = input("Enter the xlabel for the plot: ")
+        ylabel = input("Enter the ylabel for the plot: ")
+        self.plot_line(x, y, title=title, xlabel=xlabel, ylabel=ylabel)
 
     def plot_line(self, x, y, title="", xlabel="", ylabel=""):
         plt.figure(figsize=(10, 6))
