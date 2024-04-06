@@ -85,7 +85,7 @@ class Plotting:
             correlation_matrix = column_df.corr()
         elif question == 2:
             column_list = input("Enter the columns for correlation of interest (comma-separated, no space): ").split(",")
-            column_df = self.df[column_list]
+            column_df = self.dataframe[column_list]
             correlation_matrix = column_df.corr()
         else:
             print("invalid input. Try again")
