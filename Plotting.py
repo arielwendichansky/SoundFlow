@@ -113,7 +113,6 @@ class Plotting:
         fig.show()
 
     def plot_line_menu(self):
-        x = input("Enter the name of the column for x-axis: ")
         y = input("Enter the name of the column for y-axis: ")
         title = input("Enter the title for the plot: ")
         xlabel = input("Enter the xlabel for the plot: ")
@@ -122,7 +121,7 @@ class Plotting:
 
     def plot_line(self, x, y, title="", xlabel="", ylabel=""):
         plt.figure(figsize=(10, 6))
-        plt.plot(self.dataframe[x], self.dataframe[y])
+        plt.plot(self.dataframe.index, self.dataframe[y])
         plt.title(title)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
