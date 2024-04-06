@@ -81,7 +81,7 @@ class Plotting:
     def heatmap_menu(self):
         question = int(input("Do you want the corr of all or of specific columns? [1 = All, 2 = Specific]"))
         if question == 1:
-            column_df = self.df.select_dtypes(include =['number', 'float', 'integer'])
+            column_df = self.dataframe.select_dtypes(include =['number', 'float', 'integer'])
             correlation_matrix = column_df.corr()
         elif question == 2:
             column_list = input("Enter the columns for correlation of interest (comma-separated, no space): ").split(",")
