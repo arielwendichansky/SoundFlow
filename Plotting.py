@@ -117,9 +117,9 @@ class Plotting:
         title = input("Enter the title for the plot: ")
         xlabel = input("Enter the xlabel for the plot: ")
         ylabel = input("Enter the ylabel for the plot: ")
-        self.plot_line(x, y, title=title, xlabel=xlabel, ylabel=ylabel)
+        self.plot_line(y, title=title, xlabel=xlabel, ylabel=ylabel)
 
-    def plot_line(self, x, y, title="", xlabel="", ylabel=""):
+    def plot_line(self, y, title="", xlabel="", ylabel=""):
         plt.figure(figsize=(10, 6))
         plt.plot(self.dataframe.index, self.dataframe[y])
         plt.title(title)
