@@ -16,7 +16,7 @@ class Plotting:
     def display_menu(self):
         print("Available plot options:")
         print("1. Violin Plot")
-        print("2. Numeric Subplots")
+        print("2. Histogram")
         print("3. Correlation Heatmap")
         print("4. Choropleth Map")
         print("5. Line Plot")
