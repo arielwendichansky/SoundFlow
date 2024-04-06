@@ -27,7 +27,7 @@ class Plotting:
         if choice == '1':
             self.violinplot_menu()
         elif choice == '2':
-            self.plot_num_subplots()
+            self.histogram()
         elif choice == '3':
             self.heatmap_menu()
         elif choice == '4':
@@ -38,7 +38,7 @@ class Plotting:
             print("Invalid choice. Please enter a number between 1 and 5.")
 
     def violinplot_menu(self):
-        columns = input("Enter the columns to plot (comma-separated): ").split(",")
+        columns = input("Enter the columns to plot (comma-separated, no space): ").split(",")
         title = input("Enter the title for the plot: ")
         xlabel = input("Enter the xlabel for the plot: ")
         ylabel = input("Enter the ylabel for the plot: ")
@@ -53,7 +53,7 @@ class Plotting:
         plt.xticks(rotation=45)
         plt.show()
 
-    def plot_num_subplots(self):
+    def histogram(self):
         numeric_cols = self.dataframe.select_dtypes(include=['number']).columns
         num_cols = len(numeric_cols)
         num_rows = (num_cols + 1) // 2  # Ensures at least 2 rows
@@ -79,13 +79,22 @@ class Plotting:
         plt.show()
 
     def heatmap_menu(self):
-        correlation_matrix = input("Enter the columns to verify the correlation: ")
+        question = int(input("Do you want the corr of all or of specific columns? [1 = All, 2 = Specific]"))
+        if question == 1:
+            column_df = self.df.select_dtypes(include =['number', 'float', 'integer'])
+            correlation_matrix = column_df.corr()
+        elif question == 2:
+            column_list = input("Enter the columns for correlation of interest (comma-separated, no space): ").split(",")
+            column_df = self.df[column_list]
+            correlation_matrix = column_df.corr()
+        else:
+            print("invalid input. Try again")
         self.heatmap(correlation_matrix)
 
     def heatmap(self, correlation_matrix):
         plt.figure(figsize=(10, 8))
-        sns.heatmap(self.dataframe[correlation_matrix], annot=True, vmin=-1, vmax=1)
-        plt.title("Correlation among music features")
+        sns.heatmap(correlation_matrix, annot=True, vmin=-1, vmax=1)
+        plt.title("Correlation Heatmap")
         plt.show()
 
     def plot_choropleth(self):
