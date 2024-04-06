@@ -92,7 +92,7 @@ class Plotting:
         self.heatmap(correlation_matrix)
 
     def heatmap(self, correlation_matrix):
-        plt.figure(figsize=(10, 8))
+        plt.figure(figsize=(12, 8))
         sns.heatmap(correlation_matrix, annot=True, vmin=-1, vmax=1)
         plt.title("Correlation Heatmap")
         plt.show()
